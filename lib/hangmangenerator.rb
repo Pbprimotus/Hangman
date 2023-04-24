@@ -2,11 +2,11 @@ require 'yaml'
 
 class Hangman
   def self.start
-    puts "Welcome to Hangman, do you wanna start fresh (1) or do you want to load your save (2) ?"
-    answer = gets.chomp.to_i
-    if answer == 1
+    puts "Welcome to Hangman, do you wanna 'start' fresh or do you want to 'load' your save?"
+    answer = gets.chomp.downcase
+    if answer == "start"
       self.setup
-    elsif answer == 2
+    elsif answer == "load"
       self.loading
     else
       "We got something wrong try again"
@@ -38,12 +38,12 @@ class Hangman
     if @wrongguesses == 6
       self.game_over
     else
-      puts "It's turn #{@turns} You've made #{@wrongguesses} wrong gues(ses)"
+      puts "It's turn #{@turns} You've made #{@wrongguesses} wrong guess(es)"
       puts "Your progress is:"
       p @hangmanguesses
       puts "Your wrongly guessed letters are"
       p @incorrect_guesses
-      puts "Do you want to guess a letter or solve the word? Or do you want to save?"
+      puts "Do you want to 'guess' a letter, do you want to 'solve' or do you want to 'save'?"
       z = gets.chomp.downcase
       if z == "guess"
         self.guess
@@ -108,12 +108,12 @@ class Hangman
 
   def self.congrats
     puts "Congrats you won!"
-    puts "Your word was #{@wordpicked} and you took #{@turns} turns to guess the word"
+    puts "Your word was #{@wordpicked.capitalize} and you took #{@turns} turns to guess the word"
   end
 
   def self.game_over
     puts "Too bad, you got hanged!"
-    puts "Your word was #{@wordpicked} You lasted #{@turns}"
+    puts "Your word was #{@wordpicked.capitalize} You lasted #{@turns}"
   end
 
   def self.saving
